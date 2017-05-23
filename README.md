@@ -5,6 +5,18 @@ browser.
 
 ![demo](./demo.gif)
 
+# Todo
+- it should only search for words that the user is currently typing
+  or it should only downloads the words from the page once or if the user changed tab
+- it is very slow
+- we can probably remove the sh and move all python together (probably have a look at other completion engines)
+- it seems to steal focus from vim and give it to firefox when typing in vim sometimes (check if can reproduce first)
+
+
+# Requirements
+- `pip install --user marionette_driver` (note this only works with pip2)
+- start firefox using `firefox -marionette`
+
 # Installation
 
 With [vim-plug](https://github.com/junegunn/vim-plug):
@@ -36,12 +48,8 @@ set omnifunc=webcomplete#complete
 
 # Limitations
 
-* Currently works on Mac OS because of the `osascript` command line utility,
-  which is used to fetch text from the page
 * Assumes you have only one browser window opened. If there is more than one
   window open, it picks just one of them.
-* Currently works only on Chrome, but it's easy to include support for other
-  browsers by modifying the script.
 
 # Contributing
 
