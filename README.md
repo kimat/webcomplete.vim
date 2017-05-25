@@ -1,62 +1,42 @@
-# webcomplete.vim
+[deoplete.nvim](https://github.com/Shougo/deoplete.nvim) source to autocomplete words from the current [Firefox](https://www.mozilla.org/en-US/firefox/new/) tab.
 
-A Vim plugin that completes words from the currently open web page in your
-browser.
+## Requirements
 
-![demo](./demo.gif)
+- [Vimperator](http://vimperator.org/)
+- [deoplete.nvim](https://github.com/Shougo/deoplete.nvim)
 
-# Todo
-- it should only search for words that the user is currently typing
-  or it should only downloads the words from the page once or if the user changed tab
-- it is very slow
-- we can probably remove the sh and move all python together (probably have a look at other completion engines)
-- it seems to steal focus from vim and give it to firefox when typing in vim sometimes (check if can reproduce first)
+## Why not X
 
+- [marionette_driver](http://marionette-client.readthedocs.io/en/latest/basics.html) will steal focus from vim once you do `client.start_session()` (also it's python 2)
+- [Selenium](http://www.seleniumhq.org/) [can't attach to an existing ff session](https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/18).
 
-# Requirements
-- `pip install --user marionette_driver` (note this only works with pip2)
-- start firefox using `firefox -marionette`
+## Installation
 
-# Installation
-
-With [vim-plug](https://github.com/junegunn/vim-plug):
+`~/.vimrc`:
 
 ```
 Plug 'thalesmello/webcomplete.vim'
 ```
 
-## Using with deoplete
+`~/.vimperatorrc`:
 
-[`deoplete`](https://github.com/Shougo/deoplete.nvim/) is an awesome asynchronous
-completion engine for Neovim. `webcomplete` works with `deoplete` out of the box.
-Just start typing to see suggestions of words comming from your browser.
-
-## Using with `completefunc` or `omnifunc`
-
-Vim allows you to define a `completefunc` or an `omnifunc` to give you
-completions during insert mode. `webcomplete` provides you with a function that
-you can plug into these built in features.
-
-To set it up, use either of the two lines below:
 ```
-" Use <C-X><C-U> in insert mode to get completions
-set completefunc=webcomplete#complete
-
-" Use <C-X><C-O> in insert mode to get completions
-set omnifunc=webcomplete#complete
+javascript function save_url(){ var f = new io.File('/dev/shm/ff_current_url',"w"); f.write(buffer.URL); }
+javascript function save_words(){ var f = new io.File('/dev/shm/ff_current_words',"w"); f.write(window.content.document.body.textContent.split(/\s+/).sort().filter(function(v,i,o){return (v.length > 3) && v!==o[i-1]}).join("\n")); }
+autocmd LocationChange .* :js save_url();save_words();
 ```
 
-# Limitations
+## Notes
 
-* Assumes you have only one browser window opened. If there is more than one
-  window open, it picks just one of them.
+- `df -T /dev/shm` should obviously mention that type is [tmpfs](https://en.wikipedia.org/wiki/Tmpfs)
+- this path should probably become more easily configurable since it might not be the common denominator accross distros
+- we could use `" javascript function save_source(){  var f = new io.File('/dev/shm/ff_current_source', "w"); f.write(window.content.document.documentElement.outerHTML) }` and
+  do the words extraction with [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/) or [NLTK](http://www.nltk.org/)
+- we could also do line completions similary to [haya14busa/vim-auto-programming](https://github.com/haya14busa/vim-auto-programming)
+- we could also do line completions but only on `<code>` or `<pre>` parts of the webpage
+- we shouldn't crash if /dev/shm/*  isn't found
 
-# Contributing
+## Credits
 
-If you would like to contribute to the project by supporting your browser or
-operating system, I would be happy to accept pull requests.
-
-# Inspiration
-
-The project was only possible with the [help of Reddit user 18252](https://www.reddit.com/r/commandline/comments/4j73um/any_way_of_getting_the_text_of_open_chrome_pages/d34ftzx)
-and by looking at [tmux-complete.vim](https://github.com/wellle/tmux-complete.vim) as reference when implementing this plugin.
+- [shougo](https://github.com/shougo)
+- [thalesmello](https://github.com/thalesmello)
