@@ -8,7 +8,7 @@
 ## Why not X
 
 - [marionette_driver](http://marionette-client.readthedocs.io/en/latest/basics.html) will steal focus from vim once you do `client.start_session()` (also it's python 2)
-- [Selenium](http://www.seleniumhq.org/) [can't attach to an existing ff session](https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/18).
+- [Selenium](http://www.seleniumhq.org/) can't [attach to an existing ff session](https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/18).
 
 ## Installation
 
