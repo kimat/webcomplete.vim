@@ -23,7 +23,7 @@ Plug 'https://github.com/kimat/webcomplete.vim.git'
 ```
 javascript function save_url(){ var f = new io.File('/dev/shm/ff_current_url',"w"); f.write(buffer.URL); }
 javascript function save_words(){ var f = new io.File('/dev/shm/ff_current_words',"w"); f.write(window.content.document.body.textContent.split(/\s+/).sort().filter(function(v,i,o){return (v.length > 3) && v!==o[i-1]}).join("\n")); }
-autocmd LocationChange .* :js save_url();save_words();
+autocmd PageLoad .* :js save_url();save_words();
 ```
 
 ## Notes
