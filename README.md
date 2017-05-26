@@ -15,7 +15,7 @@
 `~/.vimrc`:
 
 ```
-Plug 'thalesmello/webcomplete.vim'
+Plug 'https://github.com/kimat/webcomplete.vim.git'
 ```
 
 `~/.vimperatorrc`:
