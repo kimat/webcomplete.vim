@@ -28,7 +28,11 @@ autocmd PageLoad .* :js save_url();save_source();
 autocmd LocationChange .* :js save_url();save_source();
 ```
 
-``
+`BeautifulSoup`
+
+```sh
+pip install --user beautifulsoup4
+```
 
 
 
