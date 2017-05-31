@@ -4,6 +4,7 @@
 
 - [Vimperator](http://vimperator.org/)
 - [deoplete.nvim](https://github.com/Shougo/deoplete.nvim)
+- [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)
 
 ## Why not X
 
@@ -22,19 +23,22 @@ Plug 'https://github.com/kimat/webcomplete.vim.git'
 
 ```
 javascript function save_url(){ var f = new io.File('/dev/shm/ff_current_url',"w"); f.write(buffer.URL); }
-javascript function save_words(){ var f = new io.File('/dev/shm/ff_current_words',"w"); f.write(window.content.document.body.textContent.split(/\s+/).sort().filter(function(v,i,o){return (v.length > 3) && v!==o[i-1]}).join("\n")); }
-autocmd PageLoad .* :js save_url();save_words();
+javascript function save_source(){  var f = new io.File('/dev/shm/ff_current_source', "w"); f.write(window.content.document.documentElement.outerHTML) }
+autocmd PageLoad .* :js save_url();save_source();
 ```
+
+``
+
+
 
 ## Notes
 
 - `df -T /dev/shm` should obviously mention that type is [tmpfs](https://en.wikipedia.org/wiki/Tmpfs)
 - this path should probably become more easily configurable since it might not be the common denominator accross distros
-- we could use `" javascript function save_source(){  var f = new io.File('/dev/shm/ff_current_source', "w"); f.write(window.content.document.documentElement.outerHTML) }` and
-  do the words extraction with [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/) or [NLTK](http://www.nltk.org/)
 - we could also do line completions similary to [haya14busa/vim-auto-programming](https://github.com/haya14busa/vim-auto-programming)
 - we could also do line completions but only on `<code>` or `<pre>` parts of the webpage
 - we shouldn't crash if /dev/shm/*  isn't found
+- this could become a languageServer 
 
 ## Credits
 
