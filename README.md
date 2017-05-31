@@ -25,6 +25,7 @@ Plug 'https://github.com/kimat/webcomplete.vim.git'
 javascript function save_url(){ var f = new io.File('/dev/shm/ff_current_url',"w"); f.write(buffer.URL); }
 javascript function save_source(){  var f = new io.File('/dev/shm/ff_current_source', "w"); f.write(window.content.document.documentElement.outerHTML) }
 autocmd PageLoad .* :js save_url();save_source();
+autocmd LocationChange .* :js save_url();save_source();
 ```
 
 ``
