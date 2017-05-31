@@ -13,13 +13,13 @@
 
 ## Installation
 
-`~/.vimrc`:
+`:e ~/.vimrc`
 
 ```
 Plug 'https://github.com/kimat/webcomplete.vim.git'
 ```
 
-`~/.vimperatorrc`:
+`:e ~/.vimperatorrc`
 
 ```
 javascript function save_url(){ var f = new io.File('/dev/shm/ff_current_url',"w"); f.write(buffer.URL); }
@@ -28,7 +28,7 @@ autocmd PageLoad .* :js save_url();save_source();
 autocmd LocationChange .* :js save_url();save_source();
 ```
 
-`BeautifulSoup`
+`:terminal`
 
 ```sh
 pip install --user beautifulsoup4
