@@ -16,7 +16,6 @@ class Source(Base):
         self.__url = ""
         self.__url_file = Path("/dev/shm/ff_current_url")
         self.__words = []
-        self.__words_file = Path("/dev/shm/ff_current_words")
         self.__source_file = Path("/dev/shm/ff_current_source")
 
     def gather_candidates(self, context):
