@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+from marionette_driver.marionette import Marionette
+from marionette_driver import By
+from bs4 import BeautifulSoup
+import re
+
+client = Marionette()
+client.start_session()
+# source = client.find_element(By.TAG_NAME,'html')
+
+source = client.execute_script('return document.documentElement.innerHTML')
+
+soup = BeautifulSoup(source, "html")
+# kill all script and style elements
+for script in soup(["script", "style"]):
+    script.extract()    # rip it out
+text = soup.get_text()
+words = re.compile('\S+').findall(text)
+# for word in sorted(set(words)):
+for word in sorted(set(words)):
+  print word
+
