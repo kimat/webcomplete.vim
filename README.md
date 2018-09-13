@@ -1,5 +1,7 @@
 [deoplete.nvim](https://github.com/Shougo/deoplete.nvim) source to autocomplete words from the current [Firefox](https://www.mozilla.org/en-US/firefox/new/) tab.
 
+![gif](https://raw.githubusercontent.com/kimat/images/master/ff-complete.gif)
+
 ## Requirements
 
 - [deoplete.nvim](https://github.com/Shougo/deoplete.nvim)
